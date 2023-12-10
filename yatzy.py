@@ -114,22 +114,26 @@ def yatzy(dices: list[int]) -> int:
     return YATZY_SCORE if len(set(dices)) == 1 else 0
 
 
+SCORE_BOX_FUNCTION_MAP: dict[ScoreBox, Callable] = {
+    ScoreBox.ONES: ones,
+    ScoreBox.TWOS: twos,
+    ScoreBox.THREES: threes,
+    ScoreBox.FOURS: fours,
+    ScoreBox.FIVES: fives,
+    ScoreBox.SIXES: sixes,
+    ScoreBox.PAIR: pair,
+    ScoreBox.TWO_PAIR: two_pair,
+    ScoreBox.THREE_OF_A_KIND: three_of_a_kind,
+    ScoreBox.FOUR_OF_A_KIND: four_of_a_kind,
+    ScoreBox.SMALL_STRAIGHT: small_straight,
+    ScoreBox.LARGE_STRAIGHT: large_straight,
+    ScoreBox.FULL_HOUSE: full_house,
+    ScoreBox.CHANCE: chance,
+    ScoreBox.YATZY: yatzy,
+}
+
 SCORE_BOXES: dict[int, Callable] = {
-    ScoreBox.ONES.value: ones,
-    ScoreBox.TWOS.value: twos,
-    ScoreBox.THREES.value: threes,
-    ScoreBox.FOURS.value: fours,
-    ScoreBox.FIVES.value: fives,
-    ScoreBox.SIXES.value: sixes,
-    ScoreBox.PAIR.value: pair,
-    ScoreBox.TWO_PAIR.value: two_pair,
-    ScoreBox.THREE_OF_A_KIND.value: three_of_a_kind,
-    ScoreBox.FOUR_OF_A_KIND.value: four_of_a_kind,
-    ScoreBox.SMALL_STRAIGHT.value: small_straight,
-    ScoreBox.LARGE_STRAIGHT.value: large_straight,
-    ScoreBox.FULL_HOUSE.value: full_house,
-    ScoreBox.CHANCE.value: chance,
-    ScoreBox.YATZY.value: yatzy,
+    score_box.value: SCORE_BOX_FUNCTION_MAP[score_box] for score_box in ScoreBox
 }
 
 
